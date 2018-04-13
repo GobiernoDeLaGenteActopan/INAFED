@@ -58,3 +58,7 @@
 .text-justify{
   text-align: justify;
 }
+
+.home-image{
+  height: 50vh !important;
+}

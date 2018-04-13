@@ -14,26 +14,24 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light background-primary justify-content-around" style="max-height:80px !important;">
-      <div class="col-lg-4 text-right color-accent">
-        <a class="btn background-primary color-accent" href="/static/PDF/plan.pdf" target="_blank">
-          INADEF
-        </a>
-      </div>
-      <div class="col-lg-4 text-center">
-        <img src="{%static 'images/logo.jpg'%}" alt="Gobierno de la gente" class="logo-img">
-      </div>
-      <div class="col-lg-4 text-left">
+     <div class="col-lg-4 text-right">
         <div class="dropdown">
           <a class="btn dropdown-toggle color-accent" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Indicadores
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="{%url 'indicadores:list'%}">Lista</a>
-    <a class="dropdown-item" href="{%url 'indicadores:create'%}">Crear</a>
-  </div>
+  
+          </div>
         </div>
-</div>
       </div>
+      <div class="col-lg-4 text-center">
+        <img src="{%static 'images/logo.jpg'%}" alt="Gobierno de la gente" class="logo-img">
+      </div>
+      
+      <div class="col-md-4 text-left">
+        <a class="btn color-accent" href="{% url 'login' %}">Iniciar sesión</a>
+      </div>
+    </div>
     </nav>
     <!-- End navbar -->
     <div class="container paddings-vertical">
