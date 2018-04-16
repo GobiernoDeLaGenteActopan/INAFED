@@ -34,7 +34,8 @@ class Evidencia(models.Model):
 
     indicador = models.ForeignKey(Indicador, related_name="evidencias", on_delete=models.CASCADE)
     titulo = models.TextField()
-    porcentaje = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
+    porcentaje_total = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
+    porcentaje_real = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
     archivo = models.FileField(upload_to='evidencias/', blank=True, null=True)
     completada = models.BooleanField(default=False)
 
