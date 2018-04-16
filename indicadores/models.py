@@ -23,7 +23,7 @@ class Indicador(models.Model):
     criterios_evaluacion = models.TextField(blank=True, null=True)
     area = models.ForeignKey(User, related_name='indicadores', on_delete=models.CASCADE)
     status = models.CharField(max_length=15, choices=choices_status)
-    created = models.DateTimeField(auto_created=True)
+    created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -46,7 +46,7 @@ class Subevidencia(models.Model):
 
     evidencia = models.ForeignKey(Evidencia, related_name="subevidencias", on_delete=models.CASCADE)
     titulo = models.TextField()
-    porcentaje = models.DecimalField(blank=True, null=True, max_digits=3, decimal_places=2)
+    porcentaje = models.DecimalField(blank=True, null=True, max_digits=5, decimal_places=2)
     archivo = models.FileField(upload_to='evidencias/', blank=True, null=True)
     completada = models.BooleanField(default=False)
 
