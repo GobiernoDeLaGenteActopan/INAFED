@@ -2,8 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 choices_nivel = (
-        'Gestión',
-        'Desempeño',
+        ('Gestión', 'Gestión'),
+        ('Desempeño', 'Desempeño'),
     )
 
 choices_status = (
