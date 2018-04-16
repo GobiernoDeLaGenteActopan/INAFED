@@ -4,10 +4,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>INADEF Indicadores</title>
+    <title>INAFED Indicadores</title>
     <!-- Styles CSS -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="{% static '/open-iconic/font/css/open-iconic-bootstrap.css' %}" rel="stylesheet">
     <!-- Own Styles -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
   </head>
@@ -27,10 +29,19 @@
       <div class="col-lg-4 text-center">
         <img src="{%static 'images/logo.jpg'%}" alt="Gobierno de la gente" class="logo-img">
       </div>
+      {% if request.user.is_authenticated %}
+        <div class="col-md-2 text-left">
+          <a class="btn color-accent" href="">{{ request.user.username }}</a>
+        </div>
+        <div class="col-md-2 text-left">
+          <a class="btn color-accent" href="{% url 'logout' %}">Cerrar sesión</a>
+        </div>
+      {% else %}
+        <div class="col-md-4 text-left">
+          <a class="btn color-accent" href="{% url 'login' %}">Iniciar sesión</a>
+        </div>
+      {% endif %}
       
-      <div class="col-md-4 text-left">
-        <a class="btn color-accent" href="{% url 'login' %}">Iniciar sesión</a>
-      </div>
     </div>
     </nav>
     <!-- End navbar -->

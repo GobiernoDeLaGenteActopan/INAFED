@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<h3>Gracias por su visita a esta plataforma</h3>
+				<h3>Si deseas volver a iniciar sesión presiona el botón de abajo</h3>
+				<a href="{% url 'login' %}" class="btn">Iniciar sesión nuevamente</a>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}

@@ -62,3 +62,18 @@
 .home-image{
   height: 50vh !important;
 }
+
+.icons-img{
+  height: 20px;
+  width: 20px;
+  fill: #76227c;
+}
+
+.margin-top-middle{
+  margin-top: 5vh;
+}
+
+.error-login{
+  color: darkred;
+  font-weight: bold;
+}
