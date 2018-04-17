@@ -7,9 +7,9 @@ choices_nivel = (
     )
 
 choices_status = (
-    ('#2ecc71', 'Satisfactorio'),
-    ('#2ecc71', 'Regular'),
-    ('#2ecc71', 'Pésimo')
+    ('Satisfactorio', 'Satisfactorio'),
+    ('Regular', 'Regular'),
+    ('Pésimo', 'Pésimo')
 )
 
 
@@ -52,7 +52,7 @@ class Subevidencia(models.Model):
     completada = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.indicador.indicador + ' - ' + self.evidencia.titulo + ' - ' + self.titulo
+        return self.evidencia.indicador.indicador + ' - ' + self.evidencia.titulo + ' - ' + self.titulo
 
 
 class Seguimiento(models.Model):
