@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-            <ul class="nav nav-tabs d-flex justify-content-center margin-bottom-small">
+            <div class="col-md-6">
+                <ul class="nav nav-tabs d-flex justify-content-start margin-bottom-small">
               <li class="nav-item">
                 <a class="nav-link {% if tab == "all" %} active {% endif %}" href="{% url 'indicadores:list' %}">Todos
                 <span class="badge badge-pill badge-dark">{{ total }}</span></a>
@@ -23,6 +23,34 @@
                 <span class="badge badge-pill badge-dark">{{ rojo }}</span></a>
               </li>
             </ul>
+            </div>
+            <div class="col-md-6">
+                    {% if tab == "all" %}
+                        <form action="{% url 'indicadores:list' %}"
+                    {% elif tab == "green" %}
+                        <form action="{% url 'indicadores:satisfactorio' %}"
+                    {% elif tab == "yellow" %}
+                        <form action="{% url 'indicadores:regular' %}"
+                    {% else %}
+                        <form action="{% url 'indicadores:pesimo' %}"
+                    {% endif %}
+                    method="get" class="d-flex flex-row">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{ request.GET.q }}" aria-label="Nombre de Usuario" aria-describedby="basic-addon1" >
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                   <input class="btn btn-outline-primary " type="submit" name="submit" value="Go">
+                                </span>
+                            </div>
+
+                        </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
                 <div class="list-group">
                     {% for indicador in indicadores %}
 

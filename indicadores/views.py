@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django import views
 from .models import Indicador
-from django.views.generic.list import ListView
+from django.db.models import Q
 
 class Dashboard(views.View):
 
@@ -25,10 +25,18 @@ class Dashboard(views.View):
 class indicadoresListView(views.View):
 
     def get(self, request):
-
+        print("LLEGO A TODOS")
         template_name="indicadores/indicador_list.html"
 
+        q = request.GET.get('q')
+        print(q)
         indicadores = Indicador.objects.filter(area=request.user)
+
+        if q:
+            indicadores = Indicador.objects.filter(Q(area=request.user),
+                                                    Q(nombre__icontains=q)|
+                                                    Q(indicador__icontains=q)|
+                                                     Q(descripcion__icontains=q)).distinct()
 
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
@@ -48,10 +56,18 @@ class indicadoresListView(views.View):
 class SatisfactorioList(views.View):
 
     def get(self, request):
-
+        print("LLEGO A VERDE")
         template_name = "indicadores/indicador_list.html"
 
+        q = request.GET.get('q')
         indicadores = Indicador.objects.filter(area=request.user, status="Satisfactorio")
+
+        if q:
+            indicadores = Indicador.objects.filter(Q(area=request.user),
+                                                   Q(status="Satisfactorio"),
+                                                   Q(nombre__icontains=q) |
+                                                   Q(indicador__icontains=q) |
+                                                   Q(descripcion__icontains=q)).distinct()
 
 
         total = len(Indicador.objects.filter(area=request.user))
@@ -69,14 +85,23 @@ class SatisfactorioList(views.View):
 
         return render(request, template_name, context)
 
+
 class RegularList(views.View):
 
     def get(self, request):
+        print("LLEGO A AMARILLO")
         template_name = "indicadores/indicador_list.html"
-
+        q = request.GET.get('q')
         indicadores = Indicador.objects.filter(area=request.user, status="Regular")
+        print(q)
+        if q:
+            indicadores = Indicador.objects.filter(Q(area=request.user),
+                                                   Q(status="Regular"),
+                                                   Q(nombre__icontains=q) |
+                                                   Q(indicador__icontains=q) |
+                                                   Q(descripcion__icontains=q)).distinct()
 
-
+        print(indicadores)
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
@@ -95,9 +120,18 @@ class RegularList(views.View):
 class PesimoList(views.View):
 
     def get(self, request):
-        template_name = "indicadores/indicador_list.html"
 
+        print("LLEGO A ROJO")
+        template_name = "indicadores/indicador_list.html"
+        q = request.GET.get('q')
         indicadores = Indicador.objects.filter(area=request.user, status="Pésimo")
+
+        if q:
+            indicadores = Indicador.objects.filter(Q(area=request.user),
+                                                   Q(status="Pésimo"),
+                                                   Q(nombre__icontains=q) |
+                                                   Q(indicador__icontains=q) |
+                                                   Q(descripcion__icontains=q)).distinct()
 
 
         total = len(Indicador.objects.filter(area=request.user))
