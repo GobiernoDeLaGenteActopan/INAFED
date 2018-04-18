@@ -34,7 +34,7 @@
       </div>
       {% if request.user.is_authenticated %}
         <div class="col-md-2 text-left">
-          <a class="btn color-accent" href="">{{ request.user.username }}</a>
+          <a class="btn color-accent" href="{% url 'dashboard' %}">{{ request.user.username }}</a>
         </div>
         <div class="col-md-2 text-left">
           <a class="btn color-accent" href="{% url 'logout' %}">Cerrar sesión</a>

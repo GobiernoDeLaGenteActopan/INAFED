@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <ul class="nav nav-tabs d-flex justify-content-center margin-bottom-small">
+              <li class="nav-item">
+                <a class="nav-link {% if tab == "all" %} active {% endif %}" href="{% url 'indicadores:list' %}">Todos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if tab == "green" %} active {% endif %}" href="{% url 'indicadores:satisfactorio' %}">Satisfactorios</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if tab == "yellow" %} active {% endif %}" href="{% url 'indicadores:regular' %}">Regulares</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if tab == "red" %} active {% endif %}" href="{% url 'indicadores:pesimo' %}">Pésimos</a>
+              </li>
+            </ul>
+                <div class="list-group">
+                    {% for indicador in indicadores %}
+
+                        <a href="#" class="list-group-item margin-bottom-small list-group-item-action flex-column aligm-items-start
+                          {% if indicador.status == 'Satisfactorio' %}
+                          green-hover
+                          {% elif indicador.status == 'Regular' %}
+                           yellow-hover
+                            {% else %}
+                            red-hover
+                            {% endif %}">
+
+                            <div class="d-flex justify-content-between">
+                                <h5>{{ indicador }}</h5>
+                                <small>{{ indicador.status }}</small>
+                            </div>
+                            <p>{{ indicador.descripcion }}</p>
+                            <small> No. de evidencias: {{ indicador.evidencias.count }}</small>
+                        </a>
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

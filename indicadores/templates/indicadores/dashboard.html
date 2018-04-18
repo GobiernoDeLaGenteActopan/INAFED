@@ -14,7 +14,7 @@
                    <div class="card-body d-flex flex-column justify-content-around">
                        <div class="card-title">{{ total }} </div>
                        <div class="card-text">Total</div>
-                           <a href="#" class="btn btn-outline-primary">Ver indicadores</a>
+                           <a href="{% url 'indicadores:list' %}" class="btn btn-outline background-primary">Ver indicadores</a>
 
                    </div>
                </div>
@@ -25,7 +25,7 @@
                    <div class="card-body d-flex flex-column justify-content-around">
                        <div class="card-title">{{ verde }} </div>
                        <div class="card-text">Satisfactorios</div>
-                       <a href="#" class="btn btn-outline green-back">Más detalles</a>
+                       <a href="{% url 'indicadores:satisfactorio' %}" class="btn btn-outline green-back">Más detalles</a>
 
                    </div>
                </div>
@@ -36,7 +36,7 @@
                    <div class="card-body d-flex flex-column justify-content-around">
                        <div class="card-title">{{ amarillo }} </div>
                        <div class="card-text">Regulares</div>
-                           <a href="#" class="btn btn-outline yellow-back">Más detalles</a>
+                           <a href="{% url 'indicadores:regular' %}" class="btn btn-outline yellow-back">Más detalles</a>
                    </div>
                </div>
             </div>
@@ -46,7 +46,7 @@
                    <div class="card-body d-flex flex-column justify-content-around">
                        <div class="card-title">{{ rojo }} </div>
                        <div class="card-text">Pésimos</div>
-                           <a href="#" class="btn btn-outline red-back">Más detalles</a>
+                           <a href="{% url 'indicadores:pesimo' %}" class="btn btn-outline red-back">Más detalles</a>
 
                    </div>
                </div>
