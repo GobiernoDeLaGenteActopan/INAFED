@@ -7,16 +7,20 @@
             <div class="col-md-12">
             <ul class="nav nav-tabs d-flex justify-content-center margin-bottom-small">
               <li class="nav-item">
-                <a class="nav-link {% if tab == "all" %} active {% endif %}" href="{% url 'indicadores:list' %}">Todos</a>
+                <a class="nav-link {% if tab == "all" %} active {% endif %}" href="{% url 'indicadores:list' %}">Todos
+                <span class="badge badge-pill badge-dark">{{ total }}</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if tab == "green" %} active {% endif %}" href="{% url 'indicadores:satisfactorio' %}">Satisfactorios</a>
+                <a class="nav-link {% if tab == "green" %} active {% endif %}" href="{% url 'indicadores:satisfactorio' %}">Satisfactorios
+                <span class="badge badge-pill badge-dark">{{ verde }}</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if tab == "yellow" %} active {% endif %}" href="{% url 'indicadores:regular' %}">Regulares</a>
+                <a class="nav-link {% if tab == "yellow" %} active {% endif %}" href="{% url 'indicadores:regular' %}">Regulares
+                <span class="badge badge-pill badge-dark">{{ amarillo }}</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if tab == "red" %} active {% endif %}" href="{% url 'indicadores:pesimo' %}">Pésimos</a>
+                <a class="nav-link {% if tab == "red" %} active {% endif %}" href="{% url 'indicadores:pesimo' %}">Pésimos
+                <span class="badge badge-pill badge-dark">{{ rojo }}</span></a>
               </li>
             </ul>
                 <div class="list-group">

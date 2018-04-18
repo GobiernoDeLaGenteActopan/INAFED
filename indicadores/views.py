@@ -29,8 +29,19 @@ class indicadoresListView(views.View):
         template_name="indicadores/indicador_list.html"
 
         indicadores = Indicador.objects.filter(area=request.user)
-        print(len(indicadores))
-        context = {'indicadores':indicadores, 'tab': 'all'}
+
+        total = len(Indicador.objects.filter(area=request.user))
+        verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+
+        context = {'indicadores':indicadores,
+                   'tab': 'all',
+                   'total': total,
+                   'verde': verde,
+                   'amarillo': amarillo,
+                   'rojo': rojo
+                   }
 
         return render(request, template_name, context)
 
@@ -42,7 +53,19 @@ class SatisfactorioList(views.View):
 
         indicadores = Indicador.objects.filter(area=request.user, status="Satisfactorio")
 
-        context = {'indicadores': indicadores, 'tab': 'green'}
+
+        total = len(Indicador.objects.filter(area=request.user))
+        verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+
+        context = {'indicadores': indicadores,
+                   'tab': 'green',
+                   'total': total,
+                   'verde': verde,
+                   'amarillo': amarillo,
+                   'rojo': rojo
+                   }
 
         return render(request, template_name, context)
 
@@ -53,7 +76,19 @@ class RegularList(views.View):
 
         indicadores = Indicador.objects.filter(area=request.user, status="Regular")
 
-        context = {'indicadores': indicadores, 'tab': 'yellow'}
+
+        total = len(Indicador.objects.filter(area=request.user))
+        verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+
+        context = {'indicadores': indicadores,
+                   'tab': 'yellow',
+                   'total': total,
+                   'verde': verde,
+                   'amarillo': amarillo,
+                   'rojo': rojo
+                   }
 
         return render(request, template_name, context)
 
@@ -64,7 +99,19 @@ class PesimoList(views.View):
 
         indicadores = Indicador.objects.filter(area=request.user, status="Pésimo")
 
-        context = {'indicadores': indicadores, 'tab': 'red'}
+
+        total = len(Indicador.objects.filter(area=request.user))
+        verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+
+        context = {'indicadores': indicadores,
+                   'tab': 'red',
+                   'total': total,
+                   'verde': verde,
+                   'amarillo': amarillo,
+                   'rojo': rojo
+                   }
 
         return render(request, template_name, context)
 
