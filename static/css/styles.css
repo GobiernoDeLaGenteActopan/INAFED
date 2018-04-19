@@ -37,6 +37,10 @@
   margin-bottom: 2vh !important;
 }
 
+.margin-top-small{
+  margin-top: 2vh !important;
+}
+
 .text-justify{
   text-align: justify;
 }
@@ -47,6 +51,10 @@
 
 .home-image{
   height: 50vh !important;
+}
+
+.dropdown-menu {
+  left: 60% !important;
 }
 
 /* LOGIN */
@@ -171,4 +179,62 @@
 
 .nav-item > a.active {
   color: #FFFFFF !important;
+}
+
+/* DETAIL */
+
+.margin-left-small {
+  margin-left: 5vw;
+}
+
+.border-primary-a {
+  border-color: #76227c;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.color-green
+{
+  color: #2ecc71;
+}
+
+.color-yellow
+{
+  color: #f1c40f;
+}
+
+.color-red
+{
+  color: #c0392b;
+}
+
+.text-detail-important {
+  font-size: 1.5em;
+}
+
+.text-detail-leve {
+  font-size: 1.3em;
+}
+
+.text-detail-p-small {
+  font-size: 0.8em;
+}
+
+.text-detail-p-xsmall {
+  font-size: 0.7em;
+}
+
+.card-header {
+  background-color: #76227c !important;
+  text-transform: none;
+}
+
+.btn-link {
+  color: #FFFFFF;
+}
+
+.btn-link:hover {
+  color: #FFFFFF;
+  font-weight: bold;
 }
