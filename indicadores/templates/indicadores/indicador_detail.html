@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h3><b>{{ indicador.indicador }}</b> {{ indicador.nombre }}</h3>
+            </div>
+        </div>
+        <div class="row margin-top-middle">
+
+            <div class="col-md-9 border-primary-a text-detail-important">
+                <div class="row text-center">
+                    <div class="col-md-6"><p>Status: <span
+                            class="{% if indicador.status == "Satisfactorio" %}
+                            color-green
+                            {% elif indicador.status == "Regular" %}
+                            color-yellow
+                            {% else %}
+                            color-red
+                            {% endif %}
+                            "><b>{{ indicador.status }}</b></span></p></div>
+                    <div class="col-md-6"><p>Área: <span><b>{{ indicador.area.username }}</b></span></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-detail-leve"><b>Descripción:</b></p>
+                        <p class="text-detail-p-small">{{ indicador.descripcion }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-detail-leve"><b>Criterios de evaluación:</b></p>
+                        <p class="text-detail-p-xsmall text-justify">{{ indicador.criterios_evaluacion }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 background-primary d-flex justify-content-around flex-column color-accent align-items-start">
+                <div>
+                    <h4 class="">Nivel:</h4>
+                    <p class="text-center w-100">{{ indicador.nivel }}</p>
+                </div>
+
+                <div>
+                    <h4 class="">Dimensión:</h4>
+                    <p class="">{{ indicador.dimension }}</p>
+                </div>
+
+                <div>
+                    <h4 class="">Fecha de registro:</h4>
+                    <p class="">{{ indicador.created }} hrs</p>
+                </div>
+
+                <div>
+                    <h4 class="">Fecha de actualización:</h4>
+                    <p class="">{{ indicador.updated }} hrs</p>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row margin-top-middle">
+            <div class="col-md-6 border-primary-a text-center ">
+                <h3 class="margin-top-small">Seguimientos: {{ indicador.seguimientos.count }}</h3>
+
+                {% if indicador.seguimientos.count > 0 %}
+                   <div id="accordion" class="margin-bottom-small">
+                    {% for seguimiento in indicador.seguimientos.all %}
+                        <div class="card">
+                            <div class="card-header" id="header{{ seguimiento.id }}">
+                                 <h5>
+                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{ seguimiento.id }}" aria-expanded="true" aria-controls="collapse{{ seguimiento.id }}">
+                                        {{ seguimiento.fecha }}
+                                     </button>
+                                 </h5>
+                            </div>
+
+                            <div id="collapse{{ seguimiento.id }}" class="collapse" aria-labelledby="header{{ seguimiento.id }}" data-parent="#accordion">
+                              <div class="card-body text-justify">
+                                {{ seguimiento.cuerpo }}
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                   </div>
+                {% else %}
+                    <p class="color-red">No se han registrado seguimientos</p>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

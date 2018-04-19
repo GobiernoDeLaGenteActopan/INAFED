@@ -152,4 +152,11 @@ class PesimoList(views.View):
 
 
 class indicadoresDetailView(views.View):
-    pass
+
+    def get(self, request, pk):
+
+        template_name="indicadores/indicador_detail.html"
+        indicador = Indicador.objects.get(pk=pk)
+        context = {'indicador':indicador}
+
+        return render(request, template_name, context)
