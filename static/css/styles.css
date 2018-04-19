@@ -66,8 +66,7 @@
 
 .btn-outline-primary{
   color: #76227c;
-  background-color: transparent;
-  background-image: none;
+  background: transparent none;
   border-color: #76227c;
 }
 
@@ -188,10 +187,8 @@
 }
 
 .border-primary-a {
-  border-color: #76227c;
   border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid #76227c;
 }
 
 .color-green
