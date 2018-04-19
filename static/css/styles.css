@@ -238,3 +238,13 @@
   color: #FFFFFF;
   font-weight: bold;
 }
+
+.anchor-color-primary {
+  color: #76227c;
+}
+
+.anchor-color-primary:hover {
+  color: #76227c;
+  font-weight: bold;
+  text-decoration: underline;
+}

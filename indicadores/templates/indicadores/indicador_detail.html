@@ -91,9 +91,43 @@
                 {% endif %}
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 border-primary-a text-center ">
+                <h3 class="margin-top-small">Evidencias: {{ indicador.evidencias.count }}</h3>
 
+                {% if indicador.evidencias.count > 0 %}
+                   <div id="accordion2" class="margin-bottom-small">
+                    {% for evidencia in indicador.evidencias.all %}
+                        <div class="card">
+                            <div class="card-header" id="header2{{ evidencia.id }}">
+                                 <h5>
+                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2{{ evidencia.id }}" aria-expanded="true" aria-controls="collapse2{{ evidencia.id }}">
+                                        {{ evidencia.titulo|truncatechars:40 }} | {{ evidencia.porcentaje_real }}% / {{ evidencia.porcentaje_total }}%
+                                     </button>
+                                     {% if evidencia.completada %}
+                                         <p class="color-green">Completada</p>
+                                     {% else %}
+                                         <p class="color-red">No completada</p>
+                                     {% endif %}
+                                 </h5>
+                            </div>
+
+                            <div id="collapse2{{ evidencia.id }}" class="collapse" aria-labelledby="header2{{ evidencia.id }}" data-parent="#accordion2">
+                              <div class="card-body text-justify">
+                                <p><b>Título:</b> {{ evidencia.titulo }}</p>
+                                  <p><b>Sub-Evidencias: </b>{{ evidencia.subevidencias.count }}</p>
+                                  <a class="anchor-color-primary" href="">Ir a detalle de la evidencia</a>
+                              </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                   </div>
+                {% else %}
+                    <p class="color-red">No se han registrado seguimientos</p>
+                {% endif %}
             </div>
+
+
         </div>
     </div>
 {% endblock %}
