@@ -54,7 +54,7 @@
                 <div class="list-group">
                     {% for indicador in indicadores %}
 
-                        <a href="#" class="list-group-item margin-bottom-small list-group-item-action flex-column aligm-items-start
+                        <a href="{{ indicador.get_absolute_url }}" class="list-group-item margin-bottom-small list-group-item-action flex-column aligm-items-start
                           {% if indicador.status == 'Satisfactorio' %}
                           green-hover
                           {% elif indicador.status == 'Regular' %}
