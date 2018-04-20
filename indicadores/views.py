@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django import views
-from .models import Indicador
+from .models import Indicador, Evidencia
 from django.db.models import Q
 
 class Dashboard(views.View):
@@ -158,5 +158,18 @@ class indicadoresDetailView(views.View):
         template_name="indicadores/indicador_detail.html"
         indicador = Indicador.objects.get(pk=pk)
         context = {'indicador':indicador}
+
+        return render(request, template_name, context)
+
+
+class EvidenciasDetailView(views.View):
+
+    def get(self, request, pk, epk):
+
+        template_name="indicadores/evidencia_detail.html"
+        indicador = Indicador.objects.get(pk=pk)
+        evidencia = Evidencia.objects.get(pk=epk, indicador=indicador)
+
+        context = {'evidencia': evidencia}
 
         return render(request, template_name, context)

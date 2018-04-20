@@ -46,6 +46,9 @@ class Evidencia(models.Model):
     def __str__(self):
         return self.indicador.indicador + ' - ' + self.titulo
 
+    def get_absolute_url(self):
+        return reverse('indicadores:evidencia_det', kwargs={'pk':self.indicador.id, 'epk':self.pk})
+
 
 class Subevidencia(models.Model):
 

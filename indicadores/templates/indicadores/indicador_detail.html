@@ -115,7 +115,7 @@
                               <div class="card-body text-justify">
                                 <p><b>Título:</b> {{ evidencia.titulo }}</p>
                                   <p><b>Sub-Evidencias: </b>{{ evidencia.subevidencias.count }}</p>
-                                  <a class="anchor-color-primary" href="">Ir a detalle de la evidencia</a>
+                                  <a class="anchor-color-primary" href="{{ evidencia.get_absolute_url }}" target="_blank">Ir a detalle de la evidencia</a>
                               </div>
                             </div>
                         </div>

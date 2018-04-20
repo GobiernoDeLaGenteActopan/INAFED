@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3><b>{{ evidencia.titulo }}</b></h3>
+            </div>
+        </div>
+
+        <div class="row text-center border-primary-a">
+            <div class="col-md-6">
+               <h4 class="">Porcentaje esperado: </h4>
+                <h4>Porcentaje obtenido:</h4>
+                <h4>Archivo de evidencia: </h4>
+            </div>
+            <div class="col-md-6">
+                <h4>{{ evidencia.porcentaje_total }} %</h4>
+                <h4 class="{% if evidencia.porcentaje_real <= 50 %} color-red {% else %} color-green {% endif %}">{{ evidencia.porcentaje_real }} %</h4>
+                {% if evidencia.archivo %}
+                    <a href="{{ evidencia.archivo.url }}" target="_blank"><h4>Ver archivo</h4></a>
+                {% else %}
+                    <h4>No hay evidencia</h4>
+                {% endif %}
+            </div>
+        </div>8
+
+
+
+
+    </div>
+{% endblock %}
