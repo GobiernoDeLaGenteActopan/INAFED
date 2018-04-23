@@ -19,6 +19,7 @@ class Indicador(models.Model):
     indicador = models.CharField(max_length=10)
     nombre = models.TextField()
     descripcion = models.TextField(blank=True, null=True)
+    metodo_calculo = models.TextField(blank=True, null=True)
     nivel = models.CharField(max_length=15, choices=choices_nivel, blank=True, null=True)
     dimension = models.CharField(max_length=144, blank=True, null=True)
     criterios_evaluacion = models.TextField(blank=True, null=True)

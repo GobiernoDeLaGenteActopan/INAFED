@@ -18,12 +18,23 @@
                 <h4>{{ evidencia.porcentaje_total }} %</h4>
                 <h4 class="{% if evidencia.porcentaje_real <= 50 %} color-red {% else %} color-green {% endif %}">{{ evidencia.porcentaje_real }} %</h4>
                 {% if evidencia.archivo %}
-                    <a href="{{ evidencia.archivo.url }}" target="_blank"><h4>Ver archivo</h4></a>
+                    <a href="{{ evidencia.archivo.url }}" target="_blank"><h4>Ver o descargar archivo</h4></a>
                 {% else %}
                     <h4>No hay evidencia</h4>
                 {% endif %}
             </div>
-        </div>8
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-8 offset-md-2">
+                <h3>Sub - Evidencias</h3>
+                {% if evidencia.subevidencias.count > 0 %}
+                    <h2>Si hay evidencias</h2>
+                {% else %}
+                    <h3>Esta evidencia no tiene sub - evidencias </h3>
+                {% endif %}
+            </div>
+        </div>
 
 
 
