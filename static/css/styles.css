@@ -37,6 +37,10 @@
   margin-bottom: 2vh !important;
 }
 
+.margin-bottom-normal {
+  margin-bottom: 5vh !important;
+}
+
 .margin-top-small{
   margin-top: 2vh !important;
 }
@@ -201,9 +205,18 @@
   color: #f1c40f;
 }
 
-.color-red
+.evidencia-red
 {
-  color: #c0392b;
+  background-color: #c0392b;
+  color: #fff;
+  display: inline-block;
+}
+
+.evidencia-green
+{
+  background-color: #2ecc71;
+  color: #fff;
+  display: inline-block;
 }
 
 .text-detail-important {

@@ -22,18 +22,32 @@
                             "><b>{{ indicador.status }}</b></span></p></div>
                     <div class="col-md-6"><p>Área: <span><b>{{ indicador.area.username }}</b></span></p></div>
                 </div>
+            {% if indicador.descripcion %}
                 <div class="row">
                     <div class="col-md-12">
                         <p class="text-detail-leve"><b>Descripción:</b></p>
                         <p class="text-detail-p-small">{{ indicador.descripcion }}</p>
                     </div>
                 </div>
+            {% endif %}
+
+            {% if indicador.metodo_calculo %}
+                 <div class="row">
+                    <div class="col-md-12">
+                        <p class="text-detail-leve"><b>Método de cálculo:</b></p>
+                        <p class="text-detail-p-xsmall text-justify">{{ indicador.metodo_calculo }}</p>
+                    </div>
+                </div>
+            {% endif %}
+            {% if indicador.criterios_evaluacion %}
                 <div class="row">
                     <div class="col-md-12">
                         <p class="text-detail-leve"><b>Criterios de evaluación:</b></p>
                         <p class="text-detail-p-xsmall text-justify">{{ indicador.criterios_evaluacion }}</p>
                     </div>
                 </div>
+            {% endif %}
+
             </div>
 
             <div class="col-md-3 background-primary d-flex justify-content-around flex-column color-accent align-items-start">
@@ -62,7 +76,57 @@
         </div>
 
         <div class="row margin-top-middle">
-            <div class="col-md-6 border-primary-a text-center ">
+            <div class="col-md-12 border-primary-a text-center margin-bottom-normal">
+                <h3 class="margin-top-small">Evidencias: {{ indicador.evidencias.count }}</h3>
+
+                {% if indicador.evidencias.count > 0 %}
+                   <div id="accordion2" class="margin-bottom-small">
+                    {% for evidencia in indicador.evidencias.all %}
+                        <div class="card">
+                            <div class="card-header" id="header2{{ evidencia.id }}">
+                                 <h5>
+                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2{{ evidencia.id }}" aria-expanded="true" aria-controls="collapse2{{ evidencia.id }}">
+                                        {{ evidencia.titulo|truncatechars:40 }} | {{ evidencia.porcentaje_real }}% / {{ evidencia.porcentaje_total }}%
+                                     </button>
+                                     {% if evidencia.completada %}
+                                         <p class="evidencia-green">Completada</p>
+                                     {% else %}
+                                         <p class="evidencia-red">No completada</p>
+                                     {% endif %}
+                                 </h5>
+                            </div>
+
+                            <div id="collapse2{{ evidencia.id }}" class="collapse" aria-labelledby="header2{{ evidencia.id }}" data-parent="#accordion2">
+                              <div class="card-body">
+                                  <div class="row">
+                                      <div class="col-md-9 text-center">
+                                        <p><b>Título:</b> {{ evidencia.titulo }}</p>
+                                      </div>
+                                      <div class="col-md-3 text-center">
+                                          <p><b>Sub-Evidencias: </b>{{ evidencia.subevidencias.count }}</p>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col-md-6 text-center">
+                                          <p><b>Porcentaje esperado: </b>{{ evidencia.porcentaje_total }} %</p>
+                                          <p><b>Porcentaje actual: </b>{{ evidencia.porcentaje_real }} %</p>
+                                      </div>
+                                      <div class="col-md-6 text-center">
+
+                                      </div>
+                                  </div>
+                              </div>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                   </div>
+                {% else %}
+                    <p class="color-red">No se han registrado seguimientos</p>
+                {% endif %}
+            </div>
+            <div class="col-md-12 border-primary-a text-center ">
                 <h3 class="margin-top-small">Seguimientos: {{ indicador.seguimientos.count }}</h3>
 
                 {% if indicador.seguimientos.count > 0 %}
@@ -91,41 +155,7 @@
                 {% endif %}
             </div>
 
-            <div class="col-md-6 border-primary-a text-center ">
-                <h3 class="margin-top-small">Evidencias: {{ indicador.evidencias.count }}</h3>
 
-                {% if indicador.evidencias.count > 0 %}
-                   <div id="accordion2" class="margin-bottom-small">
-                    {% for evidencia in indicador.evidencias.all %}
-                        <div class="card">
-                            <div class="card-header" id="header2{{ evidencia.id }}">
-                                 <h5>
-                                     <button class="btn btn-link" data-toggle="collapse" data-target="#collapse2{{ evidencia.id }}" aria-expanded="true" aria-controls="collapse2{{ evidencia.id }}">
-                                        {{ evidencia.titulo|truncatechars:40 }} | {{ evidencia.porcentaje_real }}% / {{ evidencia.porcentaje_total }}%
-                                     </button>
-                                     {% if evidencia.completada %}
-                                         <p class="color-green">Completada</p>
-                                     {% else %}
-                                         <p class="color-red">No completada</p>
-                                     {% endif %}
-                                 </h5>
-                            </div>
-
-                            <div id="collapse2{{ evidencia.id }}" class="collapse" aria-labelledby="header2{{ evidencia.id }}" data-parent="#accordion2">
-                              <div class="card-body text-justify">
-                                <p><b>Título:</b> {{ evidencia.titulo }}</p>
-                                  <p><b>Sub-Evidencias: </b>{{ evidencia.subevidencias.count }}</p>
-                                  <a class="anchor-color-primary" href="{{ evidencia.get_absolute_url }}" target="_blank">Ir a detalle de la evidencia</a>
-                              </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                   </div>
-                {% else %}
-                    <p class="color-red">No se han registrado seguimientos</p>
-                {% endif %}
-            </div>
 
 
         </div>
