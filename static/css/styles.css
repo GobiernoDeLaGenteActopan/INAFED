@@ -258,3 +258,19 @@
   font-weight: bold;
   text-decoration: underline;
 }
+
+.text-evidencia {
+  font-size: 0.9em;
+}
+
+.see_evidencia {
+  font-size: 1.7em;
+  color: #76227c;
+  margin-bottom: 5vh;
+}
+
+.see_evidencia:hover {
+  font-size: 1.8em;
+  color: #76227c !important;
+  text-decoration: underline;
+}

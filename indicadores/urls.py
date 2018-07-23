@@ -1,6 +1,5 @@
 from django.urls import path
 from .views import indicadoresListView, indicadoresDetailView, SatisfactorioList, RegularList, PesimoList, EvidenciasDetailView
-
 app_name="indicadores"
 
 urlpatterns = [
@@ -9,5 +8,6 @@ urlpatterns = [
     path('regular/', RegularList.as_view(), name="regular"),
     path('pesimo/', PesimoList.as_view(), name="pesimo"),
     path('<int:pk>/', indicadoresDetailView.as_view(), name="detail"),
-    path('<int:pk>/evidencias/<int:epk>/', EvidenciasDetailView.as_view(), name="evidencia_det")
+    #path('<int:pk>/evidencias/<int:epk>/', EvidenciasDetailView.as_view(), name="evidencia_det"),
+
 ]

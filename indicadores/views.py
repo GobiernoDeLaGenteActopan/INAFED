@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import views
 from .models import Indicador, Evidencia
 from django.db.models import Q
+from .forms import UploadFileForm
 
 class Dashboard(views.View):
 
@@ -157,9 +158,25 @@ class indicadoresDetailView(views.View):
 
         template_name="indicadores/indicador_detail.html"
         indicador = Indicador.objects.get(pk=pk)
-        context = {'indicador':indicador}
+        form = UploadFileForm()
+        context = {'indicador':indicador, 'form':form}
 
         return render(request, template_name, context)
+
+    def post(self, request, pk):
+
+        indicador = Indicador.objects.get(pk=pk)
+        form = UploadFileForm(request.POST, request.FILES, instance=indicador)
+        print(form)
+        if form.is_valid():
+            print("Valido")
+            form_data = form.save(commit=False)
+            print(form_data)
+            form_data.save()
+            return redirect('indicadores:detail', pk)
+        else:
+            return redirect('indicadores:list')
+
 
 
 class EvidenciasDetailView(views.View):
@@ -173,3 +190,4 @@ class EvidenciasDetailView(views.View):
         context = {'evidencia': evidencia}
 
         return render(request, template_name, context)
+

@@ -27,6 +27,7 @@ class Indicador(models.Model):
     status = models.CharField(max_length=15, choices=choices_status)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    evidencia = models.FileField(upload_to="evidencias/archivos/", blank=True, null=True)
 
     def __str__(self):
         return self.indicador + ' - ' + self.nombre
