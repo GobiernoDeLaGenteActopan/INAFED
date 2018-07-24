@@ -10,7 +10,8 @@ choices_nivel = (
 choices_status = (
     ('Satisfactorio', 'Satisfactorio'),
     ('Regular', 'Regular'),
-    ('Pésimo', 'Pésimo')
+    ('Insatisfactorio', 'Insatisfactorio'),
+    ('NCS','NCS')
 )
 
 
