@@ -4,7 +4,7 @@ from .models import Indicador, Evidencia, Subevidencia, Seguimiento
 
 class IndicadorAdmin(admin.ModelAdmin):
     list_display = ['indicador', 'nombre', 'status']
-    list_filter = ['status']
+    list_filter = ['status','area']
     actions = ['make_insatisfactorio', 'make_satisfactorio', 'make_regular', 'make_ncs']
 
     def make_insatisfactorio(self, request, queryset):
