@@ -224,7 +224,7 @@ class ResumenAreaDetail(views.View):
 
         template_name="indicadores/resumen/detalle.html"
         area = User.objects.get(username=username)
-        indicadores = Indicador.objects.filter(area=area)
+        indicadores = Indicador.objects.filter(area=area).order_by('-indicador')
         verde = len(Indicador.objects.filter(area=area, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=area, status="Regular"))
         rojo = len(Indicador.objects.filter(area=area, status="Insatisfactorio"))
