@@ -235,4 +235,28 @@ class ResumenAreaDetail(views.View):
 
 
 class ResumenGeneral(views.View):
-    pass
+    def get(self, request):
+
+        template_name="indicadores/resumen/general.html"
+        areas = User.objects.all()
+        arrayy = []
+        for area in areas:
+            dict = {
+                "usuario": area.username,
+                "nombre": area.first_name,
+                "total": Indicador.objects.filter(area=area).count(),
+                "verdes": Indicador.objects.filter(area=area, status="Satisfactorio").count(),
+                "amarillos": Indicador.objects.filter(area=area, status="Regular").count(),
+                "rojos": Indicador.objects.filter(area=area, status="Insatisfactorio").count(),
+                "ncs": Indicador.objects.filter(area=area, status="NCS").count(),
+            }
+            arrayy.append(dict)
+
+        total = len(Indicador.objects.all())
+        verde = len(Indicador.objects.filter(status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(status="Regular"))
+        rojo = len(Indicador.objects.filter(status="Insatisfactorio"))
+
+        context = {"data": arrayy, "total": total, "verde": verde, "amarillo":amarillo, "rojo": rojo}
+
+        return render(request, template_name, context)
