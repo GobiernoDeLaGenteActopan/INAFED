@@ -219,7 +219,19 @@ class ResumenAreaList(views.View):
 
 
 class ResumenAreaDetail(views.View):
-    pass
+
+    def get(self, request, username):
+
+        template_name="indicadores/resumen/detalle.html"
+        area = User.objects.get(username=username)
+        indicadores = Indicador.objects.filter(area=area)
+        verde = len(Indicador.objects.filter(area=area, status="Satisfactorio"))
+        amarillo = len(Indicador.objects.filter(area=area, status="Regular"))
+        rojo = len(Indicador.objects.filter(area=area, status="Insatisfactorio"))
+
+        context = {'indicadores':indicadores, "area": username, "verde": verde, "amarillo": amarillo, "rojo":rojo}
+
+        return render(request, template_name, context)
 
 
 class ResumenGeneral(views.View):

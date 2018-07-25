@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+     <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-center">{{area}}</h2>
+            </div>
+        </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+              <thead class="background-primary color-accent">
+                <tr>
+                  <th scope="col">Indicador</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Evidencia</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for indicador in indicadores %}
+                    <tr class="{% if indicador.status == 'Satisfactorio' %}
+                          green-hover
+                          {% elif indicador.status == 'Regular' %}
+                           yellow-hover
+                            {% elif indicador.status == 'Insatisfactorio' %}
+                            red-hover
+                            {% endif %}">
+                    <th scope="row">{{ indicador.indicador }}</th>
+                    <td>{{ indicador.nombre }}</td>
+                    <td>{{ indicador.status }}</td>
+                    {% if indicador.evidencia %}
+                        <td><a href="/media{{ indicador.evidencia }}">Descargar</a></td>
+                    {% else %}
+                        <td>Aún no presentada</td>
+                    {% endif %}
+                    </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row cards-dashboards">
+            <div class="col-md-3 text-center">
+               <div class="card card-indicadores">
+                   <div class="card-body d-flex flex-column justify-content-around">
+                       <div class="card-title">{{ indicadores.count }} </div>
+                       <div class="card-text">Total</div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="col-md-3 text-center">
+               <div class="card card-indicadores green-back">
+                   <div class="card-body d-flex flex-column justify-content-around">
+                       <div class="card-title">{{ verde }} </div>
+                       <div class="card-text">Satisfactorios</div>
+                   </div>
+               </div>
+            </div>
+
+            <div class="col-md-3 text-center">
+               <div class="card card-indicadores yellow-back">
+                   <div class="card-body d-flex flex-column justify-content-around">
+                       <div class="card-title">{{ amarillo }} </div>
+                       <div class="card-text">Regulares</div>
+                   </div>
+               </div>
+            </div>
+             <div class="col-md-3 text-center">
+                   <div class="card card-indicadores red-back">
+                       <div class="card-body d-flex flex-column justify-content-around">
+                           <div class="card-title">{{ rojo }} </div>
+                           <div class="card-text">Insatisfactorios</div>
+                       </div>
+                   </div>
+                </div>
+    </div>
+{% endblock %}
