@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <ul class="nav nav-tabs d-flex justify-content-start margin-bottom-small">
               <li class="nav-item">
                 <a class="nav-link {% if tab == "all" %} active {% endif %}" href="{% url 'indicadores:list' %}">Todos
@@ -19,12 +19,12 @@
                 <span class="badge badge-pill badge-dark">{{ amarillo }}</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {% if tab == "red" %} active {% endif %}" href="{% url 'indicadores:pesimo' %}">Pésimos
+                <a class="nav-link {% if tab == "red" %} active {% endif %}" href="{% url 'indicadores:pesimo' %}">Insatisfactorios
                 <span class="badge badge-pill badge-dark">{{ rojo }}</span></a>
               </li>
             </ul>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                     {% if tab == "all" %}
                         <form action="{% url 'indicadores:list' %}"
                     {% elif tab == "green" %}

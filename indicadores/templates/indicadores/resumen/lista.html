@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-6">
+                        <form action="{% url 'indicadores:resumen_area_list' %}"
+                    method="get" class="d-flex flex-row">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Buscar" name="q" value="{{ request.GET.q }}" aria-label="Nombre de Usuario" aria-describedby="basic-addon1" >
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                   <input class="btn btn-outline-primary " type="submit" name="submit" value="Go">
+                                </span>
+                            </div>
+
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    <div class="list-group">
+        <div class="row">
+                {% for area in areas %}
+                    {% if area.indicadores.count > 0 %}
+                    <div class="col-md-6">
+                        <a href="/indicadores/resumen/{{ area.username }}/" class="list-group-item margin-bottom-small list-group-item-action flex-column aligm-items-start principal-hover">
+
+                            <div class="d-flex justify-content-between">
+                                <h5>{{ area.username }}</h5>
+                            </div>
+                            <small> No. de evidencias: {{ area.indicadores.count }}</small>
+                        </a>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

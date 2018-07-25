@@ -3,16 +3,23 @@ from django import views
 from .models import Indicador, Evidencia
 from django.db.models import Q
 from .forms import UploadFileForm
+from django.contrib.auth.models import User
 
 class Dashboard(views.View):
 
     def get(self, request):
         template_name="indicadores/dashboard.html"
 
-        total = len(Indicador.objects.filter(area=request.user))
-        verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
-        amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
-        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+        if request.user.is_superuser:
+            total = len(Indicador.objects.all())
+            verde = len(Indicador.objects.filter(status="Satisfactorio"))
+            amarillo = len(Indicador.objects.filter(status="Regular"))
+            rojo = len(Indicador.objects.filter(status="Insatisfactorio"))
+        else:
+            total = len(Indicador.objects.filter(area=request.user))
+            verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
+            amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
+            rojo = len(Indicador.objects.filter(area=request.user, status="Insatisfactorio"))
         print(total)
 
         context = {'total':total,
@@ -42,7 +49,7 @@ class indicadoresListView(views.View):
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
-        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Insatisfactorio"))
 
         context = {'indicadores':indicadores,
                    'tab': 'all',
@@ -74,7 +81,7 @@ class SatisfactorioList(views.View):
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
-        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Insatisfactorio"))
 
         context = {'indicadores': indicadores,
                    'tab': 'green',
@@ -106,7 +113,7 @@ class RegularList(views.View):
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
-        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Insatisfactorio"))
 
         context = {'indicadores': indicadores,
                    'tab': 'yellow',
@@ -125,11 +132,11 @@ class PesimoList(views.View):
         print("LLEGO A ROJO")
         template_name = "indicadores/indicador_list.html"
         q = request.GET.get('q')
-        indicadores = Indicador.objects.filter(area=request.user, status="Pésimo")
+        indicadores = Indicador.objects.filter(area=request.user, status="Insatisfactorio")
 
         if q:
             indicadores = Indicador.objects.filter(Q(area=request.user),
-                                                   Q(status="Pésimo"),
+                                                   Q(status="Insatisfactorio"),
                                                    Q(nombre__icontains=q) |
                                                    Q(indicador__icontains=q) |
                                                    Q(descripcion__icontains=q)).distinct()
@@ -138,7 +145,7 @@ class PesimoList(views.View):
         total = len(Indicador.objects.filter(area=request.user))
         verde = len(Indicador.objects.filter(area=request.user, status="Satisfactorio"))
         amarillo = len(Indicador.objects.filter(area=request.user, status="Regular"))
-        rojo = len(Indicador.objects.filter(area=request.user, status="Pésimo"))
+        rojo = len(Indicador.objects.filter(area=request.user, status="Insatisfactorio"))
 
         context = {'indicadores': indicadores,
                    'tab': 'red',
@@ -191,3 +198,29 @@ class EvidenciasDetailView(views.View):
 
         return render(request, template_name, context)
 
+
+class ResumenAreaList(views.View):
+
+    def get(self, request):
+
+        template_name="indicadores/resumen/lista.html"
+        q = request.GET.get('q')
+
+        areas = User.objects.all()
+
+        if q:
+            areas = User.objects.filter(Q(username__icontains=q)|
+                                        Q(first_name__icontains=q)|
+                                        Q(last_name__icontains=q))
+
+        context = {'areas': areas}
+
+        return render(request, template_name, context)
+
+
+class ResumenAreaDetail(views.View):
+    pass
+
+
+class ResumenGeneral(views.View):
+    pass

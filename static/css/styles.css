@@ -171,6 +171,11 @@
   color:#FFFFFF;
 }
 
+.principal-hover:hover {
+  background-color: #76227c !important;
+  color: #FFFFFF !important;
+}
+
 .active {
   background-color: #76227c !important;
   color: #FFFFFF !important;
