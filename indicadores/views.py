@@ -229,7 +229,7 @@ class ResumenAreaDetail(views.View):
         amarillo = len(Indicador.objects.filter(area=area, status="Regular"))
         rojo = len(Indicador.objects.filter(area=area, status="Insatisfactorio"))
 
-        context = {'indicadores':indicadores, "area": username, "verde": verde, "amarillo": amarillo, "rojo":rojo}
+        context = {'indicadores':indicadores, "area": area, "verde": verde, "amarillo": amarillo, "rojo":rojo}
 
         return render(request, template_name, context)
 
@@ -243,7 +243,7 @@ class ResumenGeneral(views.View):
         for area in areas:
             dict = {
                 "usuario": area.username,
-                "nombre": area.first_name,
+                "nombre": area.get_full_name(),
                 "total": Indicador.objects.filter(area=area).count(),
                 "verdes": Indicador.objects.filter(area=area, status="Satisfactorio").count(),
                 "amarillos": Indicador.objects.filter(area=area, status="Regular").count(),

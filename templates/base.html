@@ -19,18 +19,32 @@
   <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light background-primary justify-content-around" style="max-height:80px !important;">
-     <div class="col-lg-4 text-right">
+    <div class="col-lg-2 text-right">
         <div class="dropdown">
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_superuser %}
+                <a class="btn dropdown-toggle color-accent" role="button" id="dropdownResumenes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Resúmenes
+                </a>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownResumenes">
+              <a class="dropdown-item" href="{% url 'indicadores:resumen_area_list' %}">Por área</a>
+              <a class="dropdown-item" href="{% url 'indicadores:resumen_general' %}">General</a>
+          </div>
+            {% endif %}
+        </div>
+      </div>
+     <div class="col-lg-2 text-right">
+        <div class="dropdown">
+            {% if request.user.is_authenticated and request.user.indicadores.count > 0 %}
                 <a class="btn dropdown-toggle color-accent" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Indicadores
-          </a>
+                    Indicadores
+                </a>
+
           <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <a class="dropdown-item" href="{% url 'dashboard' %}">Resumen</a>
               <a class="dropdown-item" href="{% url 'indicadores:list' %}">Todos los indicadores</a>
-            {% endif %}
-
           </div>
+            {% endif %}
         </div>
       </div>
       <div class="col-lg-4 text-center">
@@ -40,7 +54,7 @@
       </div>
       {% if request.user.is_authenticated %}
         <div class="col-md-2 text-left">
-          <a class="btn color-accent" href="{% url 'dashboard' %}">{{ request.user.username }}</a>
+          <a class="btn color-accent" href="{% url 'dashboard' %}">{{ request.user.get_full_name }}</a>
         </div>
         <div class="col-md-2 text-left">
           <a class="btn color-accent" href="{% url 'logout' %}">Cerrar sesión</a>

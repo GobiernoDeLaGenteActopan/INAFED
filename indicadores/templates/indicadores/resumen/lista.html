@@ -29,7 +29,7 @@
                         <a href="/indicadores/resumen/{{ area.username }}/" class="list-group-item margin-bottom-small list-group-item-action flex-column aligm-items-start principal-hover">
 
                             <div class="d-flex justify-content-between">
-                                <h5>{{ area.username }}</h5>
+                                <h5>{{ area.get_full_name }}</h5>
                             </div>
                             <small> No. de evidencias: {{ area.indicadores.count }}</small>
                         </a>

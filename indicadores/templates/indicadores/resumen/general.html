@@ -23,7 +23,7 @@
                 {% for d in data %}
                     {% if d.total > 0 %}
                         <tr>
-                            <th scope="row" style="text-align: justify">{{ d.usuario }}</th>
+                            <th scope="row" style="text-align: justify"><a href="{% url 'indicadores:resumen_area_detail' d.usuario %}">{{ d.nombre }}</a></th>
                             <td>{{ d.total }}</td>
                             <td>{{ d.verdes }}</td>
                             <td>{{ d.amarillos }}</td>
